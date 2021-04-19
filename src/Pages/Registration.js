@@ -7,6 +7,7 @@ import "../css/registration.css";
 import NavBar from "../Components/NavBar";
 import InputWrapper from "../Components/InputWrapper";
 import place from "../Assets/place.svg";
+import ApiService from "../Service/ApiService";
 
 function Registration() {
 	const [loginOrSignup, setLoginOrSignup] = useState(true);
@@ -48,31 +49,91 @@ function Registration() {
 					</div>
 				</div>
 				<div className="registration__content__right">
-					<RegistrationForm page={loginOrSignup} />
+					<RegistrationForm isLogin={loginOrSignup} />
 				</div>
 			</div>
 		</div>
 	);
 }
 
-function RegistrationForm({ page }) {
+function RegistrationForm({ isLogin }) {
+
+	const [userType, setUserType] = useState('')
+	const [fullName, setFullName] = useState('')
+	const [email, setEmail] = useState('')
+	const [password, setPassword] = useState('')
+	const [confirmPassowrd, setConfirmPassowrd] = useState('')
+	const [contact, setContact] = useState('')
+	const [address, setAddress] = useState('')
+
+	const login = () => {
+		let params = {
+			"email": email,
+			"password": password
+		}
+		ApiService.sendRequest('auth/login', params).then(res=>{
+			alert(res.data.message)
+		}).catch(err=>{
+			alert(err)
+		})
+	}
+
+	const register = () => {
+		let params = {
+			"name": fullName,
+			"email": email,
+			"password": password,
+			"password_confirmation": confirmPassowrd,
+			"dob": "2000-01-01",
+			"role": userType,
+			"address": address,
+			"contact": contact
+		}
+		ApiService.sendRequest('auth/register', params).then(res=>{
+			alert(res.data.message)
+		}).catch(err=>{
+			alert(err)
+		})
+	}
+
 	return (
 		<div className="form">
 			<div className="text1">
-				{page === false
+				{isLogin === false
 					? "Create your account"
 					: "Login to get started"}
 			</div>
 			<div className="horizontal"></div>
 			<div className="horizontal"></div>
-			{page === false ? (
+
+			{isLogin === false ? (
+				<div className="inputwrapper">
+					<div className="row">
+						<div className="label">Register as</div>
+					</div>
+					<div className="input">
+						<select
+							placeholder='Select'
+							value={userType}
+							onChange={e=>setUserType(e.target.value)}
+						>
+							<option value=''>Select</option>
+							<option value='seller'>Seller</option>
+							<option value='buyer'>Buyer</option>
+
+						</select>
+					</div>
+				</div>
+			) : null}
+
+			{isLogin === false ? (
 				<InputWrapper
-					label="First Name"
+					label="Full Name"
 					error={null}
 					onFocus={null}
 					type="text"
-					value={null}
-					// onChangeText={(e) => setFirstName(e.target.value)}
+					value={fullName}
+					onChangeText={(e) => setFullName(e.target.value)}
 				/>
 			) : null}
 
@@ -80,33 +141,53 @@ function RegistrationForm({ page }) {
 				label="Email"
 				error={null}
 				onFocus={null}
-				type="text"
-				value={null}
-				// onChangeText={(e) => setFirstName(e.target.value)}
+				type="email"
+				value={email}
+				onChangeText={(e) => setEmail(e.target.value)}
 			/>
 			<InputWrapper
 				label="Password"
 				error={null}
 				onFocus={null}
 				type="password"
-				value={null}
-				// onChangeText={(e) => setFirstName(e.target.value)}
+				value={password}
+				onChangeText={(e) => setPassword(e.target.value)}
 			/>
-			{page === false ? (
+			{isLogin === false ? (
 				<InputWrapper
 					label="Confirm Password"
 					error={null}
 					onFocus={null}
 					type="password"
-					value={null}
-					// onChangeText={(e) => setFirstName(e.target.value)}
+					value={confirmPassowrd}
+					onChangeText={(e) => setConfirmPassowrd(e.target.value)}
+				/>
+			) : null}
+
+			{isLogin === false ? (
+				<InputWrapper
+					label="Contact"
+					error={null}
+					onFocus={null}
+					value={contact}
+					onChangeText={(e) => setContact(e.target.value)}
+				/>
+			) : null}
+
+			{isLogin === false ? (
+				<InputWrapper
+					label="Address"
+					error={null}
+					onFocus={null}
+					value={address}
+					onChangeText={(e) => setAddress(e.target.value)}
 				/>
 			) : null}
 			<div className="horizontal" style={{ height: "2rem" }}></div>
-			{page === false ? (
-				<button className="primary__button text2">Register</button>
+			{isLogin === false ? (
+				<button className="primary__button text2" onClick={register}>Register</button>
 			) : (
-				<button className="primary__button text2">Login</button>
+				<button className="primary__button text2" onClick={login}>Login</button>
 			)}
 		</div>
 	);
