@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 
 // package
-import { Switch, Route } from "react-router-dom";
 
 import "../css/registration.css";
 
@@ -10,10 +9,24 @@ import InputWrapper from "../Components/InputWrapper";
 import place from "../Assets/place.svg";
 
 function Registration() {
+	const [loginOrSignup, setLoginOrSignup] = useState(true);
+
+	// Changing the login or signup page
+	const parentCallBackLogin = () => {
+		setLoginOrSignup(true);
+	};
+
+	const parentCallBackSignup = () => {
+		setLoginOrSignup(false);
+	};
+
 	return (
 		<div className="registration">
 			<div className="navbar__content">
-				<NavBar />
+				<NavBar
+					parentCallBackLogin={parentCallBackLogin}
+					parentCallBackSignup={parentCallBackSignup}
+				/>
 			</div>
 			<div className="registration__content">
 				<div className="registration__content__left">
@@ -35,17 +48,7 @@ function Registration() {
 					</div>
 				</div>
 				<div className="registration__content__right">
-					<Switch>
-						<Route
-							exact
-							path="/"
-							component={() => <RegistrationForm page={true} />}
-						></Route>
-						<Route
-							path="/register"
-							component={() => <RegistrationForm page={false} />}
-						></Route>
-					</Switch>
+					<RegistrationForm page={loginOrSignup} />
 				</div>
 			</div>
 		</div>
@@ -54,7 +57,7 @@ function Registration() {
 
 function RegistrationForm({ page }) {
 	return (
-		<div className="form" style={{ height: "auto" }}>
+		<div className="form">
 			<div className="text1">
 				{page === false
 					? "Create your account"

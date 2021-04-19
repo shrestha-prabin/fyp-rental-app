@@ -1,21 +1,16 @@
 import React from "react";
 
-// Package
-import { useHistory } from "react-router-dom";
-
 import "../css/navbar.css";
 import pin from "../Assets/pin.svg";
 
-function NavBar() {
-	const history = useHistory();
-
+function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 	const loginButton = (e) => {
 		e.preventDefault();
-		history.push("/");
+		parentCallBackLogin();
 	};
 	const registerButton = (e) => {
 		e.preventDefault();
-		history.push("/register");
+		parentCallBackSignup();
 	};
 
 	return (
@@ -25,8 +20,9 @@ function NavBar() {
 					src={pin}
 					style={{ width: "25px", color: "#FF6584" }}
 					alt=""
-				/>{" "}
-				Logo
+				/>
+				{"  "}
+				Gharjagga
 			</div>
 			<div className="nav__menu">
 				<div className="nav__menu__item">Home</div>

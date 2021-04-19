@@ -13,7 +13,7 @@ function App() {
 			<Switch>
 				<Route exact path="/" component={() => <Registration />} />
 				<Route path="/home" component={() => <h1>Home</h1>} />
-				{/* <Route component={() => <h1>Page Not Found</h1>} /> */}
+				<Route component={() => <h1>Page Not Found</h1>} />
 			</Switch>
 		</div>
 	);
