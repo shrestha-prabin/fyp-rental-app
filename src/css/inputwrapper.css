@@ -20,7 +20,7 @@
 .inputwrapper .error {
 	font-size: 0.8rem;
 	font-weight: 300;
-	color: #db714e;
+	color: var(--error);
 }
 
 .inputwrapper .input {

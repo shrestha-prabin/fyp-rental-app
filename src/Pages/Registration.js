@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 import "../css/registration.css";
 
+// Component
 import NavBar from "../Components/NavBar";
 import InputWrapper from "../Components/InputWrapper";
 import place from "../Assets/place.svg";
@@ -57,44 +58,131 @@ function Registration() {
 }
 
 function RegistrationForm({ isLogin }) {
+	// Input Fields
+	const [userType, setUserType] = useState("");
+	const [fullName, setFullName] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [confirmPassowrd, setConfirmPassowrd] = useState("");
+	const [contact, setContact] = useState("");
+	const [address, setAddress] = useState("");
 
-	const [userType, setUserType] = useState('')
-	const [fullName, setFullName] = useState('')
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [confirmPassowrd, setConfirmPassowrd] = useState('')
-	const [contact, setContact] = useState('')
-	const [address, setAddress] = useState('')
+	// Error
+	const [emailError, setEmailError] = useState("");
+	const [passwordError, setpasswordError] = useState("");
+	const [userTypeError, setUserTypeError] = useState("");
+	const [fullNameError, setFullNameError] = useState("");
+	const [confirmPasswordError, setConfirmPasswordError] = useState("");
+	const [contactError, setContactError] = useState("");
+	const [addressError, setAddressError] = useState("");
+
+	// onFocus
+	function emailFocus() {
+		setEmailError("");
+	}
+	function passwordFocus() {
+		setpasswordError("");
+	}
+	function userTypeFocus() {
+		setUserTypeError("");
+	}
+	function fullNameFocus() {
+		setFullNameError("");
+	}
+	function confirmPassowrdFocus() {
+		setConfirmPasswordError("");
+	}
+	function contactFocus() {
+		setContactError("");
+	}
+	function addressFocus() {
+		setAddressError("");
+	}
 
 	const login = () => {
-		let params = {
-			"email": email,
-			"password": password
+		let auth = true;
+		if (email === "") {
+			auth = false;
+			setEmailError("Email field is required");
 		}
-		ApiService.sendRequest('auth/login', params).then(res=>{
-			alert(res.data.message)
-		}).catch(err=>{
-			alert(err)
-		})
-	}
+		if (password === "") {
+			auth = false;
+			setpasswordError("Password field is required");
+		}
+
+		if (auth === true) {
+			let params = {
+				email: email,
+				password: password,
+			};
+			console.log("params", params);
+			ApiService.sendRequest("auth/login", params)
+				.then((res) => {
+					alert(res.data.message);
+				})
+				.catch((err) => {
+					alert(err);
+				});
+		}
+	};
 
 	const register = () => {
-		let params = {
-			"name": fullName,
-			"email": email,
-			"password": password,
-			"password_confirmation": confirmPassowrd,
-			"dob": "2000-01-01",
-			"role": userType,
-			"address": address,
-			"contact": contact
+		let auth = true;
+		if (userType === "") {
+			auth = false;
+			setUserTypeError("Select any one");
 		}
-		ApiService.sendRequest('auth/register', params).then(res=>{
-			alert(res.data.message)
-		}).catch(err=>{
-			alert(err)
-		})
-	}
+		if (fullName === "") {
+			auth = false;
+			setFullNameError("Fullname field is required");
+		}
+		if (email === "") {
+			auth = false;
+			setEmailError("Email field is required");
+		}
+		if (password === "") {
+			auth = false;
+			setpasswordError("password field is required");
+		}
+		if (confirmPassowrd === "") {
+			auth = false;
+			setConfirmPasswordError("Confirm password field is required");
+		}
+		if (contact === "") {
+			auth = false;
+			setContactError("Contact field is required");
+		}
+		if (address === "") {
+			auth = false;
+			setAddressError("Address field is required");
+		}
+		if (fullName === "") {
+			auth = false;
+			setFullNameError("Fullname field is required");
+		}
+
+		if (auth === true) {
+			console.log("valid");
+			let params = {
+				name: fullName,
+				email: email,
+				password: password,
+				password_confirmation: confirmPassowrd,
+				dob: "2000-01-01",
+				role: userType,
+				address: address,
+				contact: contact,
+			};
+			console.log("param", params);
+			// ApiService.sendRequest("auth/register", params)
+			// 	.then((res) => {
+			// 		alert(res.data.message);
+			// 	})
+			// 	.catch((err) => {
+			// 		alert(err);
+			// 	});
+		}
+	};
 
 	return (
 		<div className="form">
@@ -104,23 +192,23 @@ function RegistrationForm({ isLogin }) {
 					: "Login to get started"}
 			</div>
 			<div className="horizontal"></div>
-			<div className="horizontal"></div>
 
 			{isLogin === false ? (
 				<div className="inputwrapper">
 					<div className="row">
 						<div className="label">Register as</div>
+						<div className="error">{userTypeError}</div>
 					</div>
 					<div className="input">
 						<select
-							placeholder='Select'
+							placeholder="Select"
 							value={userType}
-							onChange={e=>setUserType(e.target.value)}
+							onFocus={userTypeFocus}
+							onChange={(e) => setUserType(e.target.value)}
 						>
-							<option value=''>Select</option>
-							<option value='seller'>Seller</option>
-							<option value='buyer'>Buyer</option>
-
+							<option value="">Select</option>
+							<option value="seller">Seller</option>
+							<option value="buyer">Buyer</option>
 						</select>
 					</div>
 				</div>
@@ -129,8 +217,8 @@ function RegistrationForm({ isLogin }) {
 			{isLogin === false ? (
 				<InputWrapper
 					label="Full Name"
-					error={null}
-					onFocus={null}
+					error={fullNameError}
+					onFocus={fullNameFocus}
 					type="text"
 					value={fullName}
 					onChangeText={(e) => setFullName(e.target.value)}
@@ -139,55 +227,68 @@ function RegistrationForm({ isLogin }) {
 
 			<InputWrapper
 				label="Email"
-				error={null}
-				onFocus={null}
+				error={emailError}
+				onFocus={emailFocus}
 				type="email"
 				value={email}
 				onChangeText={(e) => setEmail(e.target.value)}
 			/>
-			<InputWrapper
-				label="Password"
-				error={null}
-				onFocus={null}
-				type="password"
-				value={password}
-				onChangeText={(e) => setPassword(e.target.value)}
-			/>
-			{isLogin === false ? (
+			<div className="row">
 				<InputWrapper
-					label="Confirm Password"
-					error={null}
-					onFocus={null}
+					label="Password"
+					error={passwordError}
+					onFocus={passwordFocus}
 					type="password"
-					value={confirmPassowrd}
-					onChangeText={(e) => setConfirmPassowrd(e.target.value)}
+					value={password}
+					onChangeText={(e) => setPassword(e.target.value)}
 				/>
-			) : null}
+				{isLogin === false ? (
+					<>
+						<div className="vertical"></div>
+						<InputWrapper
+							label="Confirm Password"
+							error={confirmPasswordError}
+							onFocus={confirmPassowrdFocus}
+							type="password"
+							value={confirmPassowrd}
+							onChangeText={(e) =>
+								setConfirmPassowrd(e.target.value)
+							}
+						/>
+					</>
+				) : null}
+			</div>
+			<div className="row">
+				{isLogin === false ? (
+					<>
+						<InputWrapper
+							label="Contact"
+							error={contactError}
+							onFocus={contactFocus}
+							value={contact}
+							onChangeText={(e) => setContact(e.target.value)}
+						/>
+						<div className="vertical"></div>
+						<InputWrapper
+							label="Address"
+							error={addressError}
+							onFocus={addressFocus}
+							value={address}
+							onChangeText={(e) => setAddress(e.target.value)}
+						/>
+					</>
+				) : null}
+			</div>
 
+			<div className="horizontal"></div>
 			{isLogin === false ? (
-				<InputWrapper
-					label="Contact"
-					error={null}
-					onFocus={null}
-					value={contact}
-					onChangeText={(e) => setContact(e.target.value)}
-				/>
-			) : null}
-
-			{isLogin === false ? (
-				<InputWrapper
-					label="Address"
-					error={null}
-					onFocus={null}
-					value={address}
-					onChangeText={(e) => setAddress(e.target.value)}
-				/>
-			) : null}
-			<div className="horizontal" style={{ height: "2rem" }}></div>
-			{isLogin === false ? (
-				<button className="primary__button text2" onClick={register}>Register</button>
+				<button className="primary__button text2" onClick={register}>
+					Register
+				</button>
 			) : (
-				<button className="primary__button text2" onClick={login}>Login</button>
+				<button className="primary__button text2" onClick={login}>
+					Login
+				</button>
 			)}
 		</div>
 	);
