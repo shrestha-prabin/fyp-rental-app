@@ -7,11 +7,12 @@
 	position: sticky;
 	top: 0px;
 	min-height: 12vh;
+	padding: 2rem 0rem;
 	background: var(--white);
 }
 
 .home__body {
-	height: 88vh;
+	height: calc(88vh - 2rem);
 	overflow-x: hidden;
 	overflow-y: auto;
 	background: var(--white);
@@ -135,4 +136,13 @@
 	width: 100vw;
 	height: 200px;
 	background: var(--lightBlue);
+	padding: 4rem 5rem;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+
+.home__footer__right {
+	display: flex;
+	align-items: center;
 }

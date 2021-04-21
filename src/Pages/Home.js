@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import InputWrapper from "../Components/InputWrapper";
 import NavBarHome from "../Components/NavBarHome";
+
+import pin from "../Assets/pin.svg";
 
 import "../css/home.css";
 
@@ -176,7 +178,19 @@ function Home() {
 					</div>
 				</div>
 
-				<div className="home__footer"></div>
+				<div className="home__footer">
+					<div className="text1">Like us on Social media</div>
+
+					<div className="home__footer__right">
+						<img
+							src={pin}
+							style={{ width: "1rem", color: "#FF6584" }}
+							alt=""
+						/>
+						<div className="vertical"></div>
+						<div className="text1">Gharjagga</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
