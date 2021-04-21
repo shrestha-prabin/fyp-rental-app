@@ -7,6 +7,7 @@
 
 :root {
 	--primaryBlue: #3371f2;
+	--Blue80: #547ff3;
 	--lightBlue: #ecf2fe;
 
 	--white: #ffffff;
@@ -25,15 +26,24 @@
 	width: 100%;
 	height: 1rem;
 }
+.horizontal_half {
+	width: 100%;
+	height: 0.5rem;
+}
 .vertical {
 	height: 100%;
 	width: 1rem;
 }
 
 .big__text {
-	width: 500px;
 	font-size: 3rem;
-	font-weight: 600;
+	font-weight: 400;
+	color: var(--primaryBlack);
+}
+.big__text__11 {
+	font-size: 2rem;
+	font-weight: 400;
+	color: var(--primaryBlack);
 }
 
 .text1 {
@@ -46,7 +56,27 @@
 	font-size: 0.8rem;
 	font-weight: 300;
 }
+.detail {
+	font-size: 1rem;
+	font-weight: 200;
+	color: var(--primaryBlack22);
+}
 
+.card__title {
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--primaryBlack);
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.card__detail {
+	font-size: 1rem;
+	font-weight: 200;
+	color: var(--primaryBlack22);
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
 /* Buttons */
 .primary__button {
 	border: none;
@@ -89,6 +119,8 @@
 
 .row {
 	display: flex;
+	/* background: red; */
+	align-items: center;
 }
 
 /* scroll */

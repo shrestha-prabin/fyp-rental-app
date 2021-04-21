@@ -265,6 +265,7 @@ function RegistrationForm({ isLogin }) {
 							label="Contact"
 							error={contactError}
 							onFocus={contactFocus}
+							type="text"
 							value={contact}
 							onChangeText={(e) => setContact(e.target.value)}
 						/>
@@ -273,6 +274,7 @@ function RegistrationForm({ isLogin }) {
 							label="Address"
 							error={addressError}
 							onFocus={addressFocus}
+							type="text"
 							value={address}
 							onChangeText={(e) => setAddress(e.target.value)}
 						/>
