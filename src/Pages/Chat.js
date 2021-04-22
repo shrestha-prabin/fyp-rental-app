@@ -10,6 +10,8 @@ export default function Chat() {
     const [friendsList, setFriendsList] = useState([])
     const [chatWithUserId, setChatWithUserId] = useState(null)
 
+    const [newFriendEmail, setNewFriendEmail] = useState('')
+
     const [messages, setMessages] = useState([])
     const [newMessage, setNewMessage] = useState('')
 
@@ -70,6 +72,17 @@ export default function Chat() {
         })
     }
 
+    const addFriend = () => {
+        ApiService.sendRequest('message/add-friend', {
+            email: newFriendEmail
+        }).then(res => {
+            setNewFriendEmail('')
+            fetchFriendList()
+        }).catch(err => {
+            alert(err)
+        })
+    }
+
     const sendMessage = (e) => {
         e?.preventDefault()
 
@@ -110,6 +123,11 @@ export default function Chat() {
                         </div>
                     })
                 }
+
+                <div className='add_friend__form'>
+                    <input placeholder='Enter User Email' value={newFriendEmail} onChange={(e) => setNewFriendEmail(e.target.value)} />
+                    <button onClick={addFriend}>Add</button>
+                </div>
             </div>
 
             <div className='chat_box'>

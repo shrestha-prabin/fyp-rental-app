@@ -100,3 +100,26 @@
     margin-left: 1em;
     cursor: pointer;
 }
+
+.add_friend__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+    
+}
+
+.add_friend__form input {
+	border-radius: 0.4rem;
+    flex: 1;
+	border: 0.5px solid #979797;
+	padding: 0.8rem 0.8rem;
+    margin-left: 1em;
+    
+}
+.add_friend__form button {
+    width: 4em;
+    margin-left: 1em;
+    cursor: pointer;
+    
+}
