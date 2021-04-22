@@ -1,0 +1,102 @@
+.chat__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    flex: 1;
+    height: 100%;
+}
+
+.chat__container .friends_list {
+    flex: 0.3;
+    overflow-y: scroll;
+}
+
+.chat__container .friends_list .friend_item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    padding: 1em;
+}
+.chat__container .friends_list .friend_item:hover {
+    background-color: #fff8;
+}
+
+.chat__container .friends_list .friend_item img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: lightgray;
+    margin-right: 1em;
+}
+
+.chat__container .friends_list .friend_item .name {
+}
+
+
+
+.chat__container .chat_box {
+    flex: 0.7;
+    padding: 3em;
+    background-color: white;
+}
+
+.chat__container .chat_history__container {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 100%;
+}
+
+.chat__container .chat_history {
+    flex: 1;
+    overflow-y: scroll;
+    margin-bottom: 2em;
+}
+
+.chat__container .chat_history .incoming {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.chat__container .chat_history .incoming label {
+    background-color: rebeccapurple;
+    padding: 0.7em;
+    margin: 0.1em;
+    border-radius: 10px;
+    color: white;
+}
+
+.chat__container .chat_history .outgoing {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.chat__container .chat_history .outgoing label {
+    background-color: dodgerblue;
+    padding: 0.7em;
+    margin: 0.1em;
+    border-radius: 10px;
+    color: white;
+}
+
+.chat__container .message_input {
+    display: flex;
+    flex-direction: row;
+}
+
+.chat__container .message_input input {
+    flex: 1;
+	align-items: center;
+	background: white;
+	border-radius: 0.4rem;
+	border: 0.5px solid #979797;
+	padding: 0.8rem 0.8rem;
+}
+
+.chat__container .message_input button {
+    width: 10em;
+    margin-left: 1em;
+    cursor: pointer;
+}

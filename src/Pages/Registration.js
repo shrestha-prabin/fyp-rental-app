@@ -119,6 +119,7 @@ function RegistrationForm({ isLogin }) {
 			ApiService.sendRequest("auth/login", params)
 				.then((res) => {
 					alert(res.data.message);
+					localStorage.setItem('token', res.data.access_token)
 				})
 				.catch((err) => {
 					alert(err);
