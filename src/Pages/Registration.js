@@ -120,6 +120,7 @@ function RegistrationForm({ isLogin }) {
 				.then((res) => {
 					alert(res.data.message);
 					localStorage.setItem('token', res.data.access_token)
+					localStorage.setItem('userId', res.data.user.id)
 				})
 				.catch((err) => {
 					alert(err);

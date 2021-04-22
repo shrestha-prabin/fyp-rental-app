@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import Pusher from 'pusher-js';
 import ApiService from '../Service/ApiService';
 import '../css/chat.css'
 
 export default function Chat() {
+
+    const messageEndRef = useRef(null)
 
     const [friendsList, setFriendsList] = useState([])
     const [chatWithUserId, setChatWithUserId] = useState(null)
@@ -12,28 +14,39 @@ export default function Chat() {
     const [newMessage, setNewMessage] = useState('')
 
     useEffect(() => {
+        ApiService.sendRequest('auth/user-profile', {}).then(res => {
+        }).catch(err => {
+        })
+
         fetchFriendList()
     }, [])
 
     useEffect(() => {
-        if (chatWithUserId) {
-            console.log('User changed:', chatWithUserId);
+        const channelId = `message-channel`
+        console.log('Chat channel id', channelId);
 
-            Pusher.logToConsole = false;
+        Pusher.logToConsole = false;
 
-            var pusher = new Pusher('280d627885cb1d1212a0', {
-                cluster: 'ap2'
-            });
+        var pusher = new Pusher('280d627885cb1d1212a0', {
+            cluster: 'ap2'
+        });
 
-            var channel = pusher.subscribe(`message-channel-${chatWithUserId}`);
-            channel.bind('message-event', function (data) {
-                console.log('Message Received:', data);
-                fetchMessages()
-            });
-        }
+        var channel = pusher.subscribe(channelId);
+        channel.bind('message-event', function (data) {
+            let userId = localStorage.getItem('userId')
 
-        fetchMessages()
-
+            if (userId == data.sender_id) {
+                console.log('Message Sent:', userId, data);
+                fetchMessages(data.receiver_id)
+            } else if (userId == data.receiver_id) {
+                console.log('Message Received:', userId, data);
+                fetchMessages(data.sender_id)
+            }
+        });
+    }, [])
+    
+    useEffect(() => {
+        fetchMessages(chatWithUserId)
     }, [chatWithUserId])
 
     const fetchFriendList = () => {
@@ -44,39 +57,41 @@ export default function Chat() {
         })
     }
 
-    const fetchMessages = () => {
+    const fetchMessages = (receiver_id) => {
         ApiService.sendRequest('message/chat-history', {
-            chat_with_user_id: chatWithUserId
+            chat_with_user_id: receiver_id
         }).then(res => {
             let messages = res.data
             setMessages(messages)
-        }).catch(err => {
-            alert(err)
-        })
-    }
+            messageEndRef.current?.scrollIntoView()
 
-    const addMessage = (message) => {
-        if (!message) {
-            return
-        }
-        let temp = messages
-        temp.push(message)
-        setMessages(temp)
-
-        ApiService.sendRequest('message/send-message', {
-            message: message,
-            receiver_id: chatWithUserId
-        }).then(res => {
         }).catch(err => {
             alert(err)
         })
     }
 
     const sendMessage = (e) => {
-        if (e) {
-            e.preventDefault()
-        }
-        addMessage(newMessage);
+        e?.preventDefault()
+
+        if (!newMessage) return
+
+        let temp = messages
+        temp.push({
+            type: 'out',
+            message: newMessage
+        })
+        setMessages(messages)
+
+        messageEndRef.current?.scrollIntoView({ behavior: "smooth" })
+
+        ApiService.sendRequest('message/send-message', {
+            message: newMessage,
+            receiver_id: chatWithUserId
+        }).then(res => {
+        }).catch(err => {
+            alert(err)
+        })
+
         setNewMessage('')
     }
 
@@ -121,6 +136,10 @@ export default function Chat() {
                                         </div>
                                     })
                                 }
+                                <br />
+                                <br />
+                                <br />
+                                <span ref={messageEndRef}></span>
                             </div>
 
                             <form className='message_input' onSubmit={sendMessage}>
