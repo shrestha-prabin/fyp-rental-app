@@ -27,6 +27,7 @@ function Home() {
 								Search
 							</div>
 							<div className="horizontal"></div>
+							<div className="horizontal"></div>
 							<div className="search__form">
 								<div
 									className="row"
@@ -82,6 +83,7 @@ function Home() {
 									</div>
 								</div>
 								{/* bottom */}
+								<div className="horizontal"></div>
 								<div className="row">
 									<InputWrapper
 										label="BHK"
@@ -179,7 +181,23 @@ function Home() {
 				</div>
 
 				<div className="home__footer">
-					<div className="text1">Like us on Social media</div>
+					<div>
+						<div className="detail">Gairigaun, Kathmandu</div>
+						<div className="horizontal"></div>
+						<div className="text1">Address</div>
+					</div>
+
+					<div>
+						<div className="detail">01 532048</div>
+						<div className="horizontal"></div>
+						<div className="text1">Contact</div>
+					</div>
+
+					<div>
+						<div className="detail">facebook.com/gharjagga</div>
+						<div className="horizontal"></div>
+						<div className="text1">Facebook</div>
+					</div>
 
 					<div className="home__footer__right">
 						<img
@@ -248,6 +266,7 @@ function Card({ img, title, description }) {
 			<div className="card__image"></div>
 			<div className="card__text">
 				<div className="card__title">{title}</div>
+				<div className="horizontal"></div>
 				<div className="card__detail">{description}</div>
 			</div>
 		</div>

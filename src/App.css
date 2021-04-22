@@ -67,6 +67,7 @@
 	font-weight: 600;
 	color: var(--primaryBlack);
 	overflow: hidden;
+	white-space: nowrap;
 	text-overflow: ellipsis;
 }
 
@@ -76,6 +77,9 @@
 	color: var(--primaryBlack22);
 	overflow: hidden;
 	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+	-webkit-box-orient: vertical;
 }
 /* Buttons */
 .primary__button {
