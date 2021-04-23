@@ -5,6 +5,10 @@
 	overflow: hidden;
 }
 
+a {
+	text-decoration: none;
+}
+
 :root {
 	--primaryBlue: #3371f2;
 	--Blue80: #547ff3;
