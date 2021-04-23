@@ -7,6 +7,7 @@ import { Switch, Route } from "react-router-dom";
 import Registration from "./Pages/Registration";
 import Home from "./Pages/Home";
 import SingleProduct from "./Components/SingleProduct";
+import Search from "./Pages/Search";
 
 function App() {
 	return (
@@ -18,6 +19,8 @@ function App() {
 					path="/singleproduct"
 					component={() => <SingleProduct />}
 				/>
+
+				<Route path="/search" component={() => <Search />} />
 				<Route component={() => <h1>Page Not Found</h1>} />
 			</Switch>
 		</div>
