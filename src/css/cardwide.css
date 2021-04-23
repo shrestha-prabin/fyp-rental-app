@@ -1,0 +1,21 @@
+.cardwide {
+	width: 100%;
+	height: 200px;
+	display: flex;
+	background: var(--lightBlue);
+}
+
+.cardwide__image {
+	flex: 0.2;
+	height: 200px;
+	background: var(--primaryBlue);
+}
+.cardwide__details {
+	flex: 0.8;
+	padding: 2rem;
+}
+
+.cardwide__details__top {
+	display: flex;
+	justify-content: space-between;
+}
