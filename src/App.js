@@ -7,7 +7,6 @@ import { Switch, Route } from "react-router-dom";
 import Registration from "./Pages/Registration";
 import Home from "./Pages/Home";
 import SingleProduct from "./Components/SingleProduct";
-import Search from "./Pages/Search";
 import Chat from "./Pages/Chat";
 
 function App() {
