@@ -5,8 +5,24 @@ import NavBarHome from "../Components/NavBarHome";
 import pin from "../Assets/pin.svg";
 
 import "../css/home.css";
+import ApiService, { baseURL } from "../Service/ApiService";
 
 function Home() {
+
+	const [apartmentList, setApartmentList] = useState([])
+
+	useEffect(() => {
+		getApartmentList()
+	}, [])
+
+	const getApartmentList = () => {
+		ApiService.sendRequest('apartment/all-apartments', {}).then(res => {
+			setApartmentList(res.data)
+		}).catch(err => {
+			alert(err)
+		})
+	}
+
 	return (
 		<div className="home">
 			<div className="home__navbar">
@@ -61,7 +77,7 @@ function Home() {
 									></div>
 									<div className="row">
 										<InputWrapper
-											label="From"
+											label="Price From"
 											error={null}
 											onFocus={null}
 											value={null}
@@ -73,7 +89,7 @@ function Home() {
 											style={{ width: "4rem" }}
 										></div>
 										<InputWrapper
-											label="To"
+											label="Price To"
 											error={null}
 											onFocus={null}
 											value={null}
@@ -141,20 +157,23 @@ function Home() {
 				{/* Middle */}
 				<div className="middle__part">
 					<MiddlePart
-						title="Apartments"
-						description="The best apartments in town"
+						title="Residental"
+						description="The best residental places in town"
+						data={apartmentList.filter(item => item.purpose == 'Residenental')}
 					/>
 				</div>
 				<div className="middle__part" style={{ background: "#ecf2fe" }}>
 					<MiddlePart
-						title="Rooms"
-						description="The best rooms in your area"
+						title="Office"
+						description="The best offices in your area"
+						data={apartmentList.filter(item => item.purpose == 'Office')}
 					/>
 				</div>
 				<div className="middle__part">
 					<MiddlePart
 						title="Featured"
 						description="Some featured properties"
+						data={apartmentList}
 					/>
 				</div>
 				{/* Bottom part */}
@@ -214,47 +233,24 @@ function Home() {
 	);
 }
 
-function MiddlePart({ title, description, color, types }) {
+function MiddlePart({ title, description, data, color, types }) {
 	return (
-		<div className="row">
+		<div className="row" >
 			<div className="middle__part__header">
 				<div className="big__text__11">{title}</div>
 				<div className="horizontal"></div>
 				<div className="detail">{description}</div>
 			</div>
 			<div className="middle__part__scroll__item">
-				<Card
-					title="This is good title"
-					description="This is very good description"
-				/>
-				<Card
-					title="This is good title"
-					description="This is very good description"
-				/>
-				<Card
-					title="This is good title"
-					description="This is very good description"
-				/>
-				<Card
-					title="This is good title"
-					description="This is very good description"
-				/>
-				<Card
-					title="This is good title"
-					description="This is very good description"
-				/>
-				<Card
-					title="This is good title"
-					description="This is very good description"
-				/>
-				<Card
-					title="This is good title"
-					description="This is very good description"
-				/>
-				<Card
-					title="This is good title"
-					description="This is very good description"
-				/>
+				{
+					data.map(item => {
+						return <Card
+							img={item.image}
+							title={item.name}
+							description={item.description}
+						/>
+					})
+				}
 			</div>
 		</div>
 	);
@@ -262,8 +258,9 @@ function MiddlePart({ title, description, color, types }) {
 
 function Card({ img, title, description }) {
 	return (
-		<div className="card">
-			<div className="card__image"></div>
+		<div className="card"
+			style={{ maxWidth: 600 }}>
+			<img className="card__image" src={`${baseURL}${img}`}></img>
 			<div className="card__text">
 				<div className="card__title">{title}</div>
 				<div className="horizontal"></div>

@@ -9,8 +9,12 @@ import NavBar from "../Components/NavBar";
 import InputWrapper from "../Components/InputWrapper";
 import place from "../Assets/place.svg";
 import ApiService from "../Service/ApiService";
+import { useHistory } from "react-router";
+import { setAuthSession, setUserDetails } from "../Store/actions";
+import { useDispatch, useSelector } from 'react-redux'
 
 function Registration() {
+
 	const [loginOrSignup, setLoginOrSignup] = useState(true);
 
 	// Changing the login or signup page
@@ -50,14 +54,18 @@ function Registration() {
 					</div>
 				</div>
 				<div className="registration__content__right">
-					<RegistrationForm isLogin={loginOrSignup} />
+					<RegistrationForm isLogin={loginOrSignup} onRegisterSuccess={()=>setLoginOrSignup(true)}/>
 				</div>
 			</div>
 		</div>
 	);
 }
 
-function RegistrationForm({ isLogin }) {
+function RegistrationForm({ isLogin, onRegisterSuccess }) {
+
+    const history = useHistory()
+    const dispatch = useDispatch()
+
 	// Input Fields
 	const [userType, setUserType] = useState("");
 	const [fullName, setFullName] = useState("");
@@ -119,6 +127,18 @@ function RegistrationForm({ isLogin }) {
 			ApiService.sendRequest("auth/login", params)
 				.then((res) => {
 					alert(res.data.message);
+
+					localStorage.setItem('token', res.data.access_token)
+					localStorage.setItem('userId', res.data.user.id)
+					
+					dispatch(setAuthSession({
+						token: res.data.access_token,
+					}))
+
+					dispatch(setUserDetails(
+						res.data.user
+					))
+					history.push('/')
 				})
 				.catch((err) => {
 					alert(err);
@@ -174,13 +194,14 @@ function RegistrationForm({ isLogin }) {
 				contact: contact,
 			};
 			console.log("param", params);
-			// ApiService.sendRequest("auth/register", params)
-			// 	.then((res) => {
-			// 		alert(res.data.message);
-			// 	})
-			// 	.catch((err) => {
-			// 		alert(err);
-			// 	});
+			ApiService.sendRequest("auth/register", params)
+				.then((res) => {
+					alert('Registration Successful. Login to continue');
+					onRegisterSuccess()
+				})
+				.catch((err) => {
+					alert(err);
+				});
 		}
 	};
 

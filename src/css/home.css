@@ -80,6 +80,7 @@
 	width: 100%;
 	height: 200px;
 	background: var(--Blue80);
+	object-fit: cover;
 }
 .card__text {
 	overflow-y: hidden;

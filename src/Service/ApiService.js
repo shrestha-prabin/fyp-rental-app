@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = 'http://localhost:8000/api/'
+export const baseURL = 'http://localhost:8000'
 
 class ApiService {
 
@@ -14,7 +14,7 @@ class ApiService {
 
         return new Promise((resolve, reject) => {
             axios
-                .post(`${baseURL}${url}`, params, config)
+                .post(`${baseURL}/api/${url}`, params, config)
                 .then((response) => {
                     console.log('API Res:', url, response.data);
                     if (response.data.success) {
