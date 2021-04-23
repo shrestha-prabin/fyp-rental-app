@@ -3,6 +3,7 @@
 	height: 200px;
 	display: flex;
 	background: var(--lightBlue);
+	overflow: hidden;
 }
 
 .cardwide__image {

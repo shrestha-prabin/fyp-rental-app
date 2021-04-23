@@ -54,3 +54,8 @@
 .booking {
 	padding: 2rem 6rem 2rem 4rem;
 }
+
+.booking__list {
+	display: flex;
+	flex-wrap: wrap;
+}

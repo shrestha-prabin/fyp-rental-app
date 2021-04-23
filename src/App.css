@@ -60,6 +60,9 @@ a {
 	font-size: 1rem;
 	font-weight: 600;
 	color: var(--primaryBlack);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .text2 {
@@ -71,6 +74,9 @@ a {
 	font-size: 1rem;
 	font-weight: 200;
 	color: var(--primaryBlack22);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .card__title {

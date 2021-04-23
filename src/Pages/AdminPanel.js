@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import { Switch, Route, Link } from "react-router-dom";
 import Card from "../Components/Card";
+import Cardwide from "../Components/Cardwide";
 import InputWrapper from "../Components/InputWrapper";
 
 import NavBarHome from "../Components/NavBarHome";
@@ -145,6 +146,9 @@ function Booking() {
 		<div className="booking">
 			<div className="header__text">My Bookings Request</div>
 			<div className="horizontal" style={{ height: "2rem" }}></div>
+			<div className="booking__list">
+				<Cardwide />
+			</div>
 		</div>
 	);
 }
