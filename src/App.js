@@ -16,6 +16,10 @@ function App() {
 				<Route exact path="/" component={() => <Home />} />
 				<Route path="/user" component={() => <Registration />} />
 				<Route path="/message" component={() => <Chat />} />
+				<Route
+					path="/singleproduct"
+					component={() => <SingleProduct />}
+				/>
 				<Route component={() => <h1>Page Not Found</h1>} />
 			</Switch>
 		</div>
