@@ -1,0 +1,56 @@
+.adminpanel {
+	width: 100vw;
+	height: 100vh;
+}
+
+.adminpanel__navbar {
+	position: sticky;
+	top: 0px;
+	min-height: 12vh;
+	padding: 2rem 0rem;
+	background: var(--white);
+}
+
+.adminpanel__body {
+	display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+	width: 20vw;
+	height: calc(88vh - 0rem);
+	overflow: hidden;
+	background: var(--lightBlue);
+	display: flex;
+	flex-direction: column;
+}
+.menu__link {
+	padding: 1rem 0 1rem 6rem;
+	color: var(--primaryBlue);
+}
+.menu__link:hover {
+	color: var(--white);
+	background: var(--primaryBlue);
+}
+
+.rightbar {
+	width: 80vw;
+	overflow-x: hidden;
+	overflow-y: auto;
+	height: calc(88vh - 0rem);
+	background: var(--white);
+}
+/* apartment */
+.apartment {
+	/* background: red; */
+	padding: 2rem 6rem 2rem 4rem;
+}
+.apartment__list {
+	display: flex;
+	overflow-x: auto;
+}
+
+/* booking */
+.booking {
+	padding: 2rem 6rem 2rem 4rem;
+}
