@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from 'react'
 import Pusher from 'pusher-js';
 import ApiService from '../Service/ApiService';
 import '../css/chat.css'
+import NavBarHome from '../Components/NavBarHome';
 
 export default function Chat() {
 
@@ -46,7 +47,7 @@ export default function Chat() {
             }
         });
     }, [])
-    
+
     useEffect(() => {
         fetchMessages(chatWithUserId)
     }, [chatWithUserId])
@@ -109,7 +110,10 @@ export default function Chat() {
     }
 
 
-    return (
+    return (<div className="chat">
+        <div className="chat__navbar">
+            <NavBarHome />
+        </div>
         <div className='chat__container'>
             <div className='friends_list'>
                 {
@@ -173,5 +177,7 @@ export default function Chat() {
             </div>
 
         </div>
+    </div>
+
     )
 }

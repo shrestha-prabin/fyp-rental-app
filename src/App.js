@@ -12,9 +12,9 @@ function App() {
 	return (
 		<div className="app">
 			<Switch>
-				<Route exact path="/" component={() => <Registration />} />
-				<Route path="/home" component={() => <Home />} />
-				<Route path="/chat" component={() => <Chat />} />
+				<Route exact path="/" component={() => <Home />} />
+				<Route path="/user" component={() => <Registration />} />
+				<Route path="/message" component={() => <Chat />} />
 				<Route component={() => <h1>Page Not Found</h1>} />
 			</Switch>
 		</div>
