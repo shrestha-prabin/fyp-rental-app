@@ -1,0 +1,21 @@
+.dialogbox {
+	position: fixed;
+	z-index: 10;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	display: grid;
+	place-items: center;
+	background: rgba(0, 0, 0, 0.8);
+}
+.dialogbox__content {
+	width: 600px;
+	height: 200px;
+	border-radius: 0.5rem;
+	background: white;
+	display: grid;
+	place-items: center;
+	padding: 1rem;
+	overflow: hidden;
+}
