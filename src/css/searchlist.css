@@ -1,0 +1,11 @@
+.searchlist {
+	width: 100vw;
+	padding: 0 6rem;
+}
+
+.search__list {
+	width: 100vw;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}

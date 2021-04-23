@@ -6,21 +6,32 @@ import pin from "../Assets/pin.svg";
 
 import "../css/home.css";
 import ApiService, { baseURL } from "../Service/ApiService";
+import Search from "../Components/Search";
+import Card from "../Components/Card";
+import SearchList from "../Components/SearchList";
 
 function Home() {
+	// Show SearchList
+	const [showSearchList, setShowSearchList] = useState(false);
 
-	const [apartmentList, setApartmentList] = useState([])
+	const [apartmentList, setApartmentList] = useState([]);
 
 	useEffect(() => {
-		getApartmentList()
-	}, [])
+		getApartmentList();
+	}, []);
 
 	const getApartmentList = () => {
-		ApiService.sendRequest('apartment/all-apartments', {}).then(res => {
-			setApartmentList(res.data)
-		}).catch(err => {
-			alert(err)
-		})
+		ApiService.sendRequest("apartment/all-apartments", {})
+			.then((res) => {
+				setApartmentList(res.data);
+			})
+			.catch((err) => {
+				alert(err);
+			});
+	};
+
+	function searchResultCallback() {
+		setShowSearchList(true);
 	}
 
 	return (
@@ -32,103 +43,7 @@ function Home() {
 				{/* Top */}
 				<div className="home__body__top">
 					<div className="home__body__top__left">
-						<div className="search__container">
-							<div
-								className="big__text__11"
-								style={{
-									borderBottom: "2px solid #333333",
-									width: "60px",
-								}}
-							>
-								Search
-							</div>
-							<div className="horizontal"></div>
-							<div className="search__form">
-								<div
-									className="row"
-									style={{ justifyContent: "space-between" }}
-								>
-									<div className="checkbox row">
-										<input
-											type="radio"
-											id="buy"
-											name="type"
-											value="buy"
-										/>
-										<div className="vertical"></div>
-										<label for="male">Buy</label>
-										<div
-											className="vertical"
-											style={{ width: "2rem" }}
-										></div>
-										<input
-											type="radio"
-											id="rent"
-											name="type"
-											value="rent"
-										/>
-										<div className="vertical"></div>
-										<label for="female">Rent</label>
-									</div>
-									<div
-										className="vertical"
-										style={{ width: "2rem" }}
-									></div>
-									<div className="row">
-										<InputWrapper
-											label="Price From"
-											error={null}
-											onFocus={null}
-											value={null}
-											type="number"
-											onChangeText={null}
-										/>
-										<div
-											className="vertical"
-											style={{ width: "4rem" }}
-										></div>
-										<InputWrapper
-											label="Price To"
-											error={null}
-											onFocus={null}
-											value={null}
-											type="number"
-											onChangeText={null}
-										/>
-									</div>
-								</div>
-								{/* bottom */}
-								<div className="row">
-									<InputWrapper
-										label="BHK"
-										error={null}
-										onFocus={null}
-										value={null}
-										type="text"
-										onChangeText={null}
-									/>
-									<div
-										className="vertical"
-										style={{ width: "4rem" }}
-									></div>
-									<InputWrapper
-										label="Location"
-										error={null}
-										onFocus={null}
-										value={null}
-										type="text"
-										onChangeText={null}
-									/>
-								</div>
-							</div>
-							<div className="horizontal"></div>
-							<button
-								className="primary__button text2"
-								style={{ width: "150px" }}
-							>
-								Find
-							</button>
-						</div>
+						<Search searchResultCallback={searchResultCallback} />
 					</div>
 					<div className="home__body__top__right">
 						<div
@@ -152,19 +67,32 @@ function Home() {
 						</div>
 					</div>
 				</div>
+				{/* Search List */}
+
+				{showSearchList && (
+					<>
+						<div className="horizontal" />
+						<SearchList />
+					</>
+				)}
+
 				{/* Middle */}
 				<div className="middle__part">
 					<MiddlePart
 						title="Residental"
 						description="The best residental places in town"
-						data={apartmentList.filter(item => item.purpose == 'Residenental')}
+						data={apartmentList.filter(
+							(item) => item.purpose == "Residenental"
+						)}
 					/>
 				</div>
 				<div className="middle__part" style={{ background: "#ecf2fe" }}>
 					<MiddlePart
 						title="Office"
 						description="The best offices in your area"
-						data={apartmentList.filter(item => item.purpose == 'Office')}
+						data={apartmentList.filter(
+							(item) => item.purpose == "Office"
+						)}
 					/>
 				</div>
 				<div className="middle__part">
@@ -198,7 +126,23 @@ function Home() {
 				</div>
 
 				<div className="home__footer">
-					<div className="text1">Like us on Social media</div>
+					<div>
+						<div className="detail">Gairigaun, Kathmandu</div>
+						<div className="horizontal"></div>
+						<div className="text1">Address</div>
+					</div>
+
+					<div>
+						<div className="detail">01 532048</div>
+						<div className="horizontal"></div>
+						<div className="text1">Contact</div>
+					</div>
+
+					<div>
+						<div className="detail">facebook.com/gharjagga</div>
+						<div className="horizontal"></div>
+						<div className="text1">Facebook</div>
+					</div>
 
 					<div className="home__footer__right">
 						<img
@@ -217,35 +161,22 @@ function Home() {
 
 function MiddlePart({ title, description, data, color, types }) {
 	return (
-		<div className="row" >
+		<div className="row">
 			<div className="middle__part__header">
 				<div className="big__text__11">{title}</div>
 				<div className="horizontal"></div>
 				<div className="detail">{description}</div>
 			</div>
 			<div className="middle__part__scroll__item">
-				{
-					data.map(item => {
-						return <Card
+				{data.map((item) => {
+					return (
+						<Card
 							img={item.image}
 							title={item.name}
 							description={item.description}
 						/>
-					})
-				}
-			</div>
-		</div>
-	);
-}
-
-function Card({ img, title, description }) {
-	return (
-		<div className="card"
-			style={{ maxWidth: 600 }}>
-			<img className="card__image" src={`${baseURL}${img}`}></img>
-			<div className="card__text">
-				<div className="card__title">{title}</div>
-				<div className="card__detail">{description}</div>
+					);
+				})}
 			</div>
 		</div>
 	);

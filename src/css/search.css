@@ -1,0 +1,10 @@
+.search__container {
+	background: var(--lightBlue);
+	padding: 2rem 4rem 2rem 5rem;
+	border-radius: 0rem 3rem 3rem 0rem;
+
+	background: var(--lightBlue);
+	/* box-shadow: 2px 2px 60px 0px rgba(51, 113, 242, 0.1); */
+	backdrop-filter: blur(4.5px);
+	-webkit-backdrop-filter: blur(4.5px);
+}

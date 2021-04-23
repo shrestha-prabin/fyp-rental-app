@@ -5,6 +5,10 @@
 	overflow: hidden;
 }
 
+a {
+	text-decoration: none;
+}
+
 :root {
 	--primaryBlue: #3371f2;
 	--Blue80: #547ff3;
@@ -46,20 +50,33 @@
 	color: var(--primaryBlack);
 }
 
-.text1 {
-	font-size: 1rem;
+.header__text {
+	font-size: 1.2rem;
 	font-weight: 600;
 	color: var(--primaryBlack);
 }
 
+.text1 {
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--primaryBlack);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 .text2 {
-	font-size: 0.8rem;
+	font-size: 1rem;
 	font-weight: 300;
+	color: var(--primaryBlack);
 }
 .detail {
 	font-size: 1rem;
 	font-weight: 200;
 	color: var(--primaryBlack22);
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
 }
 
 .card__title {
@@ -67,6 +84,7 @@
 	font-weight: 600;
 	color: var(--primaryBlack);
 	overflow: hidden;
+	white-space: nowrap;
 	text-overflow: ellipsis;
 }
 
@@ -76,6 +94,9 @@
 	color: var(--primaryBlack22);
 	overflow: hidden;
 	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2; /* number of lines to show */
+	-webkit-box-orient: vertical;
 }
 /* Buttons */
 .primary__button {
@@ -104,6 +125,18 @@
 	padding: 0rem 1rem;
 	background: var(--white);
 	color: var(--primaryBlue);
+}
+
+.container {
+	width: 100%;
+	border-radius: 0.4rem;
+	background: var(--lightBlue);
+	padding: 1rem;
+}
+
+/* Displya flex child  */
+.child {
+	flex: 1;
 }
 
 .form {
