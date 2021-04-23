@@ -4,7 +4,7 @@ import "../css/navbar.css";
 import pin from "../Assets/pin.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthSession } from "../Store/actions";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
 	const loginButton = (e) => {
@@ -17,18 +17,20 @@ function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
 	};
 
 	const dispatch = useDispatch()
+	const history = useHistory()
 
 	const authSession = useSelector(state => state.authSession)
 	const userDetails = useSelector(state => state.userDetails)
 
 	const isLoggedIn = () => {
-		console.log(authSession);
 		return authSession != null
 	}
 
 	const logout = () => {
         dispatch(setAuthSession(null))
+		localStorage.setItem('token', null)
         alert('Logout successful')	
+		history.push('/')
 	}
 
 	return (

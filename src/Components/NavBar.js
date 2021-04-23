@@ -29,6 +29,7 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 	const logout = () => {
         dispatch(setAuthSession(null))
         alert('Logout successful')	
+		localStorage.setItem('token', null)
 	}
 
 	return (
