@@ -16,31 +16,31 @@ function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
 		parentCallBackSignup();
 	};
 
-	const dispatch = useDispatch()
-	const history = useHistory()
+	const dispatch = useDispatch();
+	const history = useHistory();
 
-	const authSession = useSelector(state => state.authSession)
-	const userDetails = useSelector(state => state.userDetails)
+	const authSession = useSelector((state) => state.authSession);
+	const userDetails = useSelector((state) => state.userDetails);
 
 	const isLoggedIn = () => {
-		return authSession != null
-	}
+		return authSession != null;
+	};
 
 	const isSeller = () => {
-		return isLoggedIn && userDetails?.role === 'seller'
-	}
+		return isLoggedIn && userDetails?.role === "seller";
+	};
 
 	const isAdmin = () => {
-		return isLoggedIn && userDetails?.role === 'admin'
-	}
+		return isLoggedIn && userDetails?.role === "admin";
+	};
 
 	const logout = () => {
-        dispatch(setAuthSession(null))
-		dispatch(setUserDetails({}))
-		localStorage.setItem('token', null)
-        alert('Logout successful')	
-		history.push('/')
-	}
+		dispatch(setAuthSession(null));
+		dispatch(setUserDetails({}));
+		localStorage.setItem("token", null);
+		alert("Logout successful");
+		history.push("/");
+	};
 
 	return (
 		<div className="navbar">
@@ -51,28 +51,41 @@ function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
 					alt=""
 				/>
 				<div className="vertical"></div>
-				Gharjagga
+				FlatRentalNepal
 			</div>
 			<div className="nav__menu">
-				<Link className="nav__menu__item" to='/'>Home</Link>
-				{
-					isSeller() && <Link className="nav__menu__item" to='/adminpanel'>Seller Panel</Link>
-				}
-				{
-					isAdmin() && <Link className="nav__menu__item" to='/adminpanel'>Admin Panel</Link>
-				}
-				
+				<Link className="nav__menu__item" to="/">
+					Home
+				</Link>
+				{isSeller() && (
+					<Link className="nav__menu__item" to="/adminpanel">
+						Seller Panel
+					</Link>
+				)}
+				{isAdmin() && (
+					<Link className="nav__menu__item" to="/adminpanel">
+						Admin Panel
+					</Link>
+				)}
+
 				{/* <div className="nav__menu__item">For Rent</div> */}
 				{/* <div className="nav__menu__item">For Sale</div> */}
-				{
-					isLoggedIn() && <Link className="nav__menu__item" to='/message'>Messages</Link>
-				}
-				
-				{
-					isLoggedIn() ? (
-						<div className="nav__menu__item" onClick={logout}>{`Logout (${userDetails.name})`}</div>
-					): (<Link className="nav__menu__item" to='/user'>Login</Link>)
-				}
+				{isLoggedIn() && (
+					<Link className="nav__menu__item" to="/message">
+						Messages
+					</Link>
+				)}
+
+				{isLoggedIn() ? (
+					<div
+						className="nav__menu__item"
+						onClick={logout}
+					>{`Logout (${userDetails.name})`}</div>
+				) : (
+					<Link className="nav__menu__item" to="/user">
+						Login
+					</Link>
+				)}
 			</div>
 		</div>
 	);

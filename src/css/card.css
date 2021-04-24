@@ -6,6 +6,8 @@
 	height: 340px;
 	background: var(--white);
 	border: 1px solid var(--lightBlue);
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 .card__image {
 	width: 100%;

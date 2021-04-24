@@ -5,7 +5,16 @@ import ApiService, { baseURL } from "../Service/ApiService";
 import "../css/card.css";
 import { Link } from "react-router-dom";
 
-function Card({ id, img, title, price, location, description, showDelete, onDelete }) {
+function Card({
+	id,
+	img,
+	title,
+	price,
+	location,
+	description,
+	showDelete,
+	onDelete,
+}) {
 	return (
 		<div className="card">
 			<Link to={`/details/${id}`}>
@@ -17,16 +26,15 @@ function Card({ id, img, title, price, location, description, showDelete, onDele
 					<div className="card__detail">{description}</div>
 					<div className="card__detail">{location}</div>
 
-					{ }
-
+					{}
 				</div>
 			</Link>
 
-			{
-				showDelete && (
-					<button className='delete__button' onClick={onDelete}>Delete</button>
-				)
-			}
+			{showDelete && (
+				<button className="delete__button" onClick={onDelete}>
+					Delete
+				</button>
+			)}
 		</div>
 	);
 }

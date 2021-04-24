@@ -98,7 +98,7 @@ a {
 	-webkit-line-clamp: 2; /* number of lines to show */
 	-webkit-box-orient: vertical;
 }
-.card__detail2{
+.card__detail2 {
 	font-size: 1rem;
 	font-weight: 200;
 	color: var(--primaryBlack22);

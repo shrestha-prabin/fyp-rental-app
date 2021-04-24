@@ -17,22 +17,22 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 		parentCallBackSignup();
 	};
 
-    const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
-	const authSession = useSelector(state => state.authSession)
-	const userDetails = useSelector(state => state.userDetails)
+	const authSession = useSelector((state) => state.authSession);
+	const userDetails = useSelector((state) => state.userDetails);
 
 	const isLoggedIn = () => {
 		console.log(authSession);
-		return authSession != null
-	}
+		return authSession != null;
+	};
 
 	const logout = () => {
-        dispatch(setAuthSession(null))
-        dispatch(setUserDetails({}))
-        alert('Logout successful')	
-		localStorage.setItem('token', null)
-	}
+		dispatch(setAuthSession(null));
+		dispatch(setUserDetails({}));
+		alert("Logout successful");
+		localStorage.setItem("token", null);
+	};
 
 	return (
 		<div className="navbar">
@@ -43,10 +43,12 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 					alt=""
 				/>
 				{"  "}
-				Gharjagga
+				FlatRentalNepal
 			</div>
 			<div className="nav__menu">
-				<Link className="nav__menu__item" to='/'>Home</Link>
+				<Link className="nav__menu__item" to="/">
+					Home
+				</Link>
 				<div className="nav__menu__item">About</div>
 				<div className="nav__menu__item">Services</div>
 				<div className="nav__menu__item">How it Works</div>
@@ -61,26 +63,23 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 					Register
 				</button>
 				<div className="vertical"></div>
-				{
-					isLoggedIn() ? (
-						<button
-							className="secondary__button"
-							style={{ width: "120px" }}
-							onClick={logout}
-						>
-							{`Logout (${userDetails?.name})` }
-						</button>
-					) : (
-						<button
-							className="secondary__button"
-							style={{ width: "120px" }}
-							onClick={loginButton}
-						>
-							Login
-						</button>
-					)
-				}
-
+				{isLoggedIn() ? (
+					<button
+						className="secondary__button"
+						style={{ width: "120px" }}
+						onClick={logout}
+					>
+						{`Logout (${userDetails?.name})`}
+					</button>
+				) : (
+					<button
+						className="secondary__button"
+						style={{ width: "120px" }}
+						onClick={loginButton}
+					>
+						Login
+					</button>
+				)}
 			</div>
 		</div>
 	);

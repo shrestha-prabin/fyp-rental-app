@@ -138,7 +138,7 @@ function Home() {
 					/>
 				</div>
 				{/* Bottom part */}
-				<div className="bottom__part">
+				{/* <div className="bottom__part">
 					<div className="big__text__11">Featured Properties</div>
 					<div
 						className="horizontal"
@@ -158,7 +158,7 @@ function Home() {
 							description="Attractive flat for rent in baneshwor area"
 						/>
 					</div>
-				</div>
+				</div> */}
 
 				<div className="home__footer">
 					<div>
