@@ -249,7 +249,7 @@ function Apartment() {
 									<div className="input">
 										<select
 											placeholder="Select"
-											value={setPurpose}
+											value={purpose}
 											onChange={(e) => setPurpose(e.target.value)}
 										>
 											<option value="">Select</option>
