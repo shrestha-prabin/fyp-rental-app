@@ -80,7 +80,7 @@ function SingleProduct({ match }) {
 						<div className="horizontal"></div>
 						<div className="container">
 							<div className="card__title">Description</div>
-							<div className="card__detail">
+							<div className="card__detail2">
 								{details.description}
 							</div>
 						</div>
