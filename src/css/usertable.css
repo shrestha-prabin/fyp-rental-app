@@ -1,7 +1,7 @@
 .usertable {
-	width: 60%;
-	height: 500px;
+	width: auto;
+	height: auto;
 	overflow-y: auto;
 	background: white;
-	padding: 5rem;
+	padding: 4rem;
 }
