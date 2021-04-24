@@ -174,7 +174,7 @@ function Home() {
 					</div>
 
 					<div>
-						<div className="detail">facebook.com/gharjagga</div>
+						<div className="detail">facebook.com/FlatRentalNepal</div>
 						<div className="horizontal"></div>
 						<div className="text1">Facebook</div>
 					</div>
@@ -186,7 +186,7 @@ function Home() {
 							alt=""
 						/>
 						<div className="vertical"></div>
-						<div className="text1">Gharjagga</div>
+						<div className="text1">FlatRentalNepal</div>
 					</div>
 				</div>
 			</div>

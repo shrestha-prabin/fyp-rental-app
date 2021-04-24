@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { Switch, Route, Link } from "react-router-dom";
@@ -8,6 +8,7 @@ import Cardwide from "../Components/Cardwide";
 import InputWrapper from "../Components/InputWrapper";
 
 import NavBarHome from "../Components/NavBarHome";
+import UserTable from "../Components/UserTable";
 
 import "../css/adminpanel.css";
 import ApiService, { baseURL } from "../Service/ApiService";
@@ -53,7 +54,7 @@ function AdminPanel() {
 
 					{
 						isAdmin() && (
-							<Link className="menu__link" to="/adminpanel/booking">
+							<Link className="menu__link" to="/adminpanel/users">
 								Users
 							</Link>
 						)
@@ -71,6 +72,11 @@ function AdminPanel() {
 							exact
 							path="/adminpanel/booking"
 							component={() => <Booking />}
+						/>
+						<Route
+							exact
+							path="/adminpanel/users"
+							component={() => <UserTable />}
 						/>
 						<Route component={() => <h1>...</h1>} />
 					</Switch>
@@ -95,6 +101,8 @@ function Apartment() {
 
 	const [apartmentList, setApartmentList] = useState([]);
 
+	const listRef = useRef(null)
+
 	const dispatch = useDispatch()
 
 	const authSession = useSelector(state => state.authSession)
@@ -111,13 +119,13 @@ function Apartment() {
 	const getApartmentList = () => {
 		if (isSeller()) {
 			ApiService.sendRequest('apartment/user-apartments').then(res=>{
-				setApartmentList(res.data)
+				setApartmentList(res.data.reverse())
 			}).catch(err=>{
 				alert(err)
 			})
 		} else {
 			ApiService.sendRequest('apartment/all-apartments').then(res=>{
-				setApartmentList(res.data)
+				setApartmentList(res.data.reverse())
 			}).catch(err=>{
 				alert(err)
 			})
@@ -171,6 +179,9 @@ function Apartment() {
 			console.log('API Res:', 'add', response.data);
 			if (response.data.success) {
 				alert(response.data.data.message)
+				clearForm()
+				getApartmentList()
+				listRef.current?.scrollIntoView()
 			} else {
 				alert(response.data.error.message || response.data.error[Object.keys(response.data.error)[0]])
 			}
@@ -181,8 +192,22 @@ function Apartment() {
 			});
 	};
 
+	const clearForm = () => {
+		setName('')
+		setLocation('')
+		setType('')
+		setPurpose('')
+		setprice('')
+		setComment('')
+		setSelectedImage(null)
+		setPreviewImage(null)
+		setBhk('')
+	}
+
 	const deleteApartment = (id) => {
-		// TODO:- Fix delete api
+		if (!window.confirm('Confirm delete?')) {
+			return
+		}
 		ApiService.sendRequest('apartment/delete-apartment', {"apartment_id": id}).then(res=>{
 			getApartmentList()
 		}).catch(err=>{
@@ -192,11 +217,11 @@ function Apartment() {
 
 	return (
 		<div className="apartment">
-			<div className="header__text">Apartments List</div>
+			<div className="header__text" ref={listRef}>Apartments List</div>
 			<div className="horizontal" style={{ height: "2rem" }}></div>
 			<div className="apartment__list">
 				{apartmentList.map((item, i) => (
-					<Card key={i} id={item.id} title={item.name} description={item.description} price={item.price} location={item.location} img={item.image} showDelete={false} onDelete={()=>deleteApartment(item.id)} />
+					<Card key={i} id={item.id} title={item.name} description={item.description} price={item.price} location={item.location} img={item.image} showDelete={true} onDelete={()=>deleteApartment(item.id)} />
 				))}
 			</div>
 			<div className="horizontal" style={{ height: "2rem" }}></div>

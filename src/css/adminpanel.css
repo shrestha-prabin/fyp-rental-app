@@ -7,7 +7,7 @@
 	position: sticky;
 	top: 0px;
 	min-height: 12vh;
-	padding: 2rem 0rem;
+	/* padding: 2rem 0rem; */
 	background: var(--white);
 }
 

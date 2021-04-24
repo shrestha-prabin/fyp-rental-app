@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
 import "../css/cardwide.css";
 import { baseURL } from "../Service/ApiService";
 
 function Cardwide({data, onUpdateStatus}) {
+
+	const [status, setStatus] = useState(data.booking_status)
+
+	const updateStatus = (status) => {
+		setStatus(status)
+		onUpdateStatus(status)
+	}
+	
+
 	return (
 		<div className="cardwide">
 			<img className="cardwide__image" src={`${baseURL}/storage/${data.apartment.image}`}></img>
@@ -35,8 +44,8 @@ function Cardwide({data, onUpdateStatus}) {
 					<div className="input">
 						<select
 							placeholder="Select"
-							value={data.booking_status}
-							onChange={(e) => onUpdateStatus(e.target.value)}
+							value={status}
+							onChange={(e) => updateStatus(e.target.value)}
 						>
 							<option value="">Select</option>
 							<option value="pending">Pending</option>
