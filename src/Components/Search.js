@@ -16,9 +16,8 @@ function Search({
 	setPriceTo,
 	setBhk,
 	setLocation,
-	searchResultCallback 
+	searchResultCallback,
 }) {
-
 	const findButton = () => {
 		console.log(type, priceFrom, priceTo, location, bhk);
 		searchResultCallback();
@@ -43,7 +42,6 @@ function Search({
 					style={{ justifyContent: "space-between" }}
 				>
 					<div className="checkbox row">
-						
 						<input
 							type="radio"
 							id="buy"
