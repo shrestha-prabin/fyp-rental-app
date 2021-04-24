@@ -13,14 +13,14 @@ import SearchList from "../Components/SearchList";
 function Home() {
 	// Show SearchList
 	const [showSearchList, setShowSearchList] = useState(false);
-	const [searchResults, setSearchResults] = useState([])
-	const searchRef = useRef(null)
+	const [searchResults, setSearchResults] = useState([]);
+	const searchRef = useRef(null);
 
 	const [apartmentList, setApartmentList] = useState([]);
 
 	const [type, setType] = useState("Buy");
-	const [priceFrom, setPriceFrom] = useState('');
-	const [priceTo, setPriceTo] = useState('');
+	const [priceFrom, setPriceFrom] = useState("");
+	const [priceTo, setPriceTo] = useState("");
 	const [location, setLocation] = useState("");
 	const [bhk, setBhk] = useState("");
 
@@ -40,23 +40,22 @@ function Home() {
 
 	function searchResultCallback() {
 		let params = {
-			"type": type,
-			"price_from": priceFrom,
-			"price_to": priceTo,
-			"location": location,
-			"bhk": bhk
-		}
+			type: type,
+			price_from: priceFrom,
+			price_to: priceTo,
+			location: location,
+			bhk: bhk,
+		};
 		ApiService.sendRequest("apartment/all-apartments", params)
 			.then((res) => {
-				setSearchResults(res.data)
-				searchRef?.current?.scrollIntoView({ behavior: "smooth" })
+				setSearchResults(res.data);
+				searchRef?.current?.scrollIntoView({ behavior: "smooth" });
 			})
 			.catch((err) => {
 				alert(err);
 			});
 
 		setShowSearchList(true);
-
 	}
 
 	return (
@@ -74,11 +73,11 @@ function Home() {
 							priceTo={priceTo}
 							location={location}
 							bhk={bhk}
-							setType={value => setType(value)}
-							setPriceFrom={value => setPriceFrom(value)}
-							setPriceTo={value => setPriceTo(value)}
-							setBhk={value => setBhk(value)}
-							setLocation={value => setLocation(value)}
+							setType={(value) => setType(value)}
+							setPriceFrom={(value) => setPriceFrom(value)}
+							setPriceTo={(value) => setPriceTo(value)}
+							setBhk={(value) => setBhk(value)}
+							setLocation={(value) => setLocation(value)}
 							searchResultCallback={searchResultCallback}
 						/>
 					</div>
@@ -105,11 +104,10 @@ function Home() {
 					</div>
 				</div>
 				{/* Search List */}
-
-				{showSearchList && searchResults.length>0 && (
+				{showSearchList && searchResults.length > 0 && (
 					<>
 						<div className="horizontal" ref={searchRef} />
-						<SearchList data={searchResults}/>
+						<SearchList data={searchResults} />
 					</>
 				)}
 

@@ -9,6 +9,7 @@ import Home from "./Pages/Home";
 import SingleProduct from "./Components/SingleProduct";
 import Chat from "./Pages/Chat";
 import AdminPanel from "./Pages/AdminPanel";
+import UserTable from "./Components/UserTable";
 
 function App() {
 	return (
@@ -17,11 +18,9 @@ function App() {
 				<Route exact path="/" component={() => <Home />} />
 				<Route path="/user" component={() => <Registration />} />
 				<Route path="/message" component={() => <Chat />} />
-				<Route
-					path="/details/:id"
-					component={SingleProduct}
-				/>
+				<Route path="/details/:id" component={SingleProduct} />
 				<Route path="/adminpanel" component={() => <AdminPanel />} />
+				<Route path="/usertable" component={() => <UserTable />} />
 				<Route component={() => <h1>Page Not Found</h1>} />
 			</Switch>
 		</div>

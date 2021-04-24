@@ -11,10 +11,9 @@ import place from "../Assets/place.svg";
 import ApiService from "../Service/ApiService";
 import { useHistory } from "react-router";
 import { setAuthSession, setUserDetails } from "../Store/actions";
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from "react-redux";
 
 function Registration() {
-
 	const [loginOrSignup, setLoginOrSignup] = useState(true);
 
 	// Changing the login or signup page
@@ -54,7 +53,10 @@ function Registration() {
 					</div>
 				</div>
 				<div className="registration__content__right">
-					<RegistrationForm isLogin={loginOrSignup} onRegisterSuccess={()=>setLoginOrSignup(true)}/>
+					<RegistrationForm
+						isLogin={loginOrSignup}
+						onRegisterSuccess={() => setLoginOrSignup(true)}
+					/>
 				</div>
 			</div>
 		</div>
@@ -62,9 +64,8 @@ function Registration() {
 }
 
 function RegistrationForm({ isLogin, onRegisterSuccess }) {
-
-    const history = useHistory()
-    const dispatch = useDispatch()
+	const history = useHistory();
+	const dispatch = useDispatch();
 
 	// Input Fields
 	const [userType, setUserType] = useState("");
@@ -128,17 +129,17 @@ function RegistrationForm({ isLogin, onRegisterSuccess }) {
 				.then((res) => {
 					alert(res.data.message);
 
-					localStorage.setItem('token', res.data.access_token)
-					localStorage.setItem('userId', res.data.user.id)
-					
-					dispatch(setAuthSession({
-						token: res.data.access_token,
-					}))
+					localStorage.setItem("token", res.data.access_token);
+					localStorage.setItem("userId", res.data.user.id);
 
-					dispatch(setUserDetails(
-						res.data.user
-					))
-					history.push('/')
+					dispatch(
+						setAuthSession({
+							token: res.data.access_token,
+						})
+					);
+
+					dispatch(setUserDetails(res.data.user));
+					history.push("/");
 				})
 				.catch((err) => {
 					alert(err);
@@ -166,7 +167,7 @@ function RegistrationForm({ isLogin, onRegisterSuccess }) {
 		}
 		if (confirmPassowrd === "") {
 			auth = false;
-			setConfirmPasswordError("Confirm password field is required");
+			setConfirmPasswordError("Field is required");
 		}
 		if (contact === "") {
 			auth = false;
@@ -196,8 +197,8 @@ function RegistrationForm({ isLogin, onRegisterSuccess }) {
 			console.log("param", params);
 			ApiService.sendRequest("auth/register", params)
 				.then((res) => {
-					alert('Registration Successful. Login to continue');
-					onRegisterSuccess()
+					alert("Registration Successful. Login to continue");
+					onRegisterSuccess();
 				})
 				.catch((err) => {
 					alert(err);
