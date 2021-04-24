@@ -235,7 +235,7 @@ function UserTable() {
 				office: "Sidney",
 				age: "23",
 				date: "2010/09/20",
-				salary: "$85",
+				salary: "$845",
 			},
 		],
 	};
