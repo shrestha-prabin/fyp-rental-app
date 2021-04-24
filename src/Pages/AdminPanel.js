@@ -109,7 +109,7 @@ function Apartment() {
 	}, [])
 
 	const getApartmentList = () => {
-		if (isSeller) {
+		if (isSeller()) {
 			ApiService.sendRequest('apartment/user-apartments').then(res=>{
 				setApartmentList(res.data)
 			}).catch(err=>{
