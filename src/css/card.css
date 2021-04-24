@@ -1,7 +1,9 @@
 /* cards */
 .card {
+	position: relative;
 	min-width: 200px;
-	height: 300px;
+	width: 260px;
+	height: 340px;
 	background: var(--white);
 	border: 1px solid var(--lightBlue);
 }
@@ -19,4 +21,12 @@
 .card:not(:last-of-type) {
 	margin-right: 4rem;
 	margin-bottom: 4rem;
+}
+
+.delete__button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: red;
+	color: white;
 }

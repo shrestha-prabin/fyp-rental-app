@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import InputWrapper from "../Components/InputWrapper";
 import NavBarHome from "../Components/NavBarHome";
 
@@ -13,8 +13,16 @@ import SearchList from "../Components/SearchList";
 function Home() {
 	// Show SearchList
 	const [showSearchList, setShowSearchList] = useState(false);
+	const [searchResults, setSearchResults] = useState([])
+	const searchRef = useRef(null)
 
 	const [apartmentList, setApartmentList] = useState([]);
+
+	const [type, setType] = useState("Buy");
+	const [priceFrom, setPriceFrom] = useState('');
+	const [priceTo, setPriceTo] = useState('');
+	const [location, setLocation] = useState("");
+	const [bhk, setBhk] = useState("");
 
 	useEffect(() => {
 		getApartmentList();
@@ -31,7 +39,24 @@ function Home() {
 	};
 
 	function searchResultCallback() {
+		let params = {
+			"type": type,
+			"price_from": priceFrom,
+			"price_to": priceTo,
+			"location": location,
+			"bhk": bhk
+		}
+		ApiService.sendRequest("apartment/all-apartments", params)
+			.then((res) => {
+				setSearchResults(res.data)
+				searchRef?.current?.scrollIntoView({ behavior: "smooth" })
+			})
+			.catch((err) => {
+				alert(err);
+			});
+
 		setShowSearchList(true);
+
 	}
 
 	return (
@@ -43,7 +68,19 @@ function Home() {
 				{/* Top */}
 				<div className="home__body__top">
 					<div className="home__body__top__left">
-						<Search searchResultCallback={searchResultCallback} />
+						<Search
+							type={type}
+							priceFrom={priceFrom}
+							priceTo={priceTo}
+							location={location}
+							bhk={bhk}
+							setType={value => setType(value)}
+							setPriceFrom={value => setPriceFrom(value)}
+							setPriceTo={value => setPriceTo(value)}
+							setBhk={value => setBhk(value)}
+							setLocation={value => setLocation(value)}
+							searchResultCallback={searchResultCallback}
+						/>
 					</div>
 					<div className="home__body__top__right">
 						<div
@@ -69,10 +106,10 @@ function Home() {
 				</div>
 				{/* Search List */}
 
-				{showSearchList && (
+				{showSearchList && searchResults.length>0 && (
 					<>
-						<div className="horizontal" />
-						<SearchList />
+						<div className="horizontal" ref={searchRef} />
+						<SearchList data={searchResults}/>
 					</>
 				)}
 
@@ -82,7 +119,7 @@ function Home() {
 						title="Residental"
 						description="The best residental places in town"
 						data={apartmentList.filter(
-							(item) => item.purpose == "Residenental"
+							(item) => item.purpose == "Residental"
 						)}
 					/>
 				</div>
@@ -171,6 +208,9 @@ function MiddlePart({ title, description, data, color, types }) {
 				{data.map((item) => {
 					return (
 						<Card
+							id={item.id}
+							price={item.price}
+							location={item.location}
 							img={item.image}
 							title={item.name}
 							description={item.description}

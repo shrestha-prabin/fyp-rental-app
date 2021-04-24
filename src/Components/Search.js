@@ -5,12 +5,19 @@ import "../css/search.css";
 import InputWrapper from "./InputWrapper";
 import NavBarHome from "./NavBarHome";
 
-function Search({ searchResultCallback }) {
-	const [type, setType] = useState("buy");
-	const [priceFrom, setPriceFrom] = useState(0);
-	const [priceTo, setPriceTo] = useState(0);
-	const [location, setLocation] = useState("");
-	const [bhk, setBhk] = useState("");
+function Search({
+	type,
+	priceFrom,
+	priceTo,
+	location,
+	bhk,
+	setType,
+	setPriceFrom,
+	setPriceTo,
+	setBhk,
+	setLocation,
+	searchResultCallback 
+}) {
 
 	const findButton = () => {
 		console.log(type, priceFrom, priceTo, location, bhk);
@@ -36,12 +43,13 @@ function Search({ searchResultCallback }) {
 					style={{ justifyContent: "space-between" }}
 				>
 					<div className="checkbox row">
+						
 						<input
 							type="radio"
 							id="buy"
 							name="type"
-							value="buy"
-							checked={type === "buy"}
+							value="Buy"
+							checked={type === "Buy"}
 							onChange={(e) => setType(e.target.value)}
 						/>
 						<div className="vertical"></div>
@@ -54,8 +62,8 @@ function Search({ searchResultCallback }) {
 							type="radio"
 							id="rent"
 							name="type"
-							checked={type === "rent"}
-							value="rent"
+							checked={type === "Rent"}
+							value="Rent"
 							onChange={(e) => setType(e.target.value)}
 						/>
 						<div className="vertical"></div>

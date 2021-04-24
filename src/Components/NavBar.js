@@ -3,8 +3,9 @@ import React from "react";
 import "../css/navbar.css";
 import pin from "../Assets/pin.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthSession } from "../Store/actions";
+import { setAuthSession, setUserDetails } from "../Store/actions";
 import { Link } from "react-router-dom";
+import ApiService from "../Service/ApiService";
 
 function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 	const loginButton = (e) => {
@@ -28,6 +29,7 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 
 	const logout = () => {
         dispatch(setAuthSession(null))
+        dispatch(setUserDetails({}))
         alert('Logout successful')	
 		localStorage.setItem('token', null)
 	}
@@ -66,7 +68,7 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 							style={{ width: "120px" }}
 							onClick={logout}
 						>
-							{`Logout (${userDetails.name})` }
+							{`Logout (${userDetails?.name})` }
 						</button>
 					) : (
 						<button

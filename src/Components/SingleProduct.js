@@ -1,13 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../css/singleproduct.css";
+import ApiService, { baseURL } from "../Service/ApiService";
 import Dialogbox from "./Dialogbox";
+import NavBarHome from "./NavBarHome";
 
-function SingleProduct() {
+function SingleProduct({ match }) {
 	const [comment, setComment] = useState("");
+	const [details, setDetails] = useState({})
 
 	// open dialogbox
 	const [isOpenDialogBox, setIsOpenDialogBox] = useState(false);
+
+	useEffect(() => {
+		getApartmentDetails(match.params.id)
+	}, [match])
 
 	const bookApartmentButton = () => {
 		console.log("Book apartment");
@@ -16,31 +23,65 @@ function SingleProduct() {
 
 	const commentButton = () => {
 		console.log(comment);
+		let params = {
+			"apartment_id": match.params.id,
+			"review_text": comment,
+			"rating": 5
+		}
+		ApiService.sendRequest('review/add-review', params).then(res => {
+			alert(res.data.message)
+			getApartmentDetails(match.params.id)
+		}).catch(err => {
+			alert(err)
+		})
 	};
 
 	function close() {
 		setIsOpenDialogBox(!isOpenDialogBox);
 	}
 
+	const submitBooking = () => {
+		let params = {
+			"apartment_id": match.params.id,
+			"booking_date": "2030-10-10" // TODO:- Use userinput date
+		}
+		
+		ApiService.sendRequest('booking/book-apartment', params).then(res=>{
+			alert(res.data.message)
+		}).catch(err=>{
+			alert(err)
+		})
+	}
+
+	const getApartmentDetails = (id) => {
+		ApiService.sendRequest('apartment/details', { "id": id }).then(res => {
+			setDetails(res.data)
+		}).catch(err => {
+			alert(err)
+		})
+	}
+
 	return (
 		<>
 			{isOpenDialogBox && (
-				<Dialogbox title="Are you sure?" close={close} />
+				<Dialogbox title="Are you sure?" close={close} onConfirm={submitBooking} />
 			)}
 
 			<div className="singleproduct">
+				<div style={{ height: '12vh' }}>
+					<NavBarHome />
+
+				</div>
 				<div className="singleproduct__top">
 					<div className="child">
 						<div className="header__text">
-							Flat For Rent in Jawalakhel
+							{details.name}
 						</div>
 						<div className="horizontal"></div>
 						<div className="container">
 							<div className="card__title">Description</div>
 							<div className="card__detail">
-								TanahAir offers a service for creating a website
-								design, illustration, icon set, weebsite
-								development
+								{details.description}
 							</div>
 						</div>
 						<div className="horizontal"></div>
@@ -52,8 +93,10 @@ function SingleProduct() {
 							style={{ marginLeft: "1.2rem" }}
 						>
 							<ul style={{ lineHeight: "2rem" }}>
-								<li className="text2">BHK-1</li>
-								<li className="text2">Good Parking space</li>
+								<li className="text2">Type: {details.type}</li>
+								<li className="text2">Purpose: {details.purpose}</li>
+								<li className="text2">BHK-{details.bhk}</li>
+								<li className="text2">Location: {details.location}</li>
 							</ul>
 						</div>
 						<div className="horizontal"></div>
@@ -67,25 +110,25 @@ function SingleProduct() {
 					</div>
 					<div className="vertical"></div>
 					<div className="child">
-						<div className="img">s</div>
+						<img className="img" src={`${baseURL}${details.image}`}></img>
 					</div>
 				</div>
 				{/* Comment */}
 				<div className="horizontal" style={{ height: "2rem" }}></div>
+				<h2>Reviews</h2>
 				<div className="comment__list">
-					<Comment
-						name="simon"
-						comment="Lorem ipsum dolor sit amet consectetur adipisicing elit.
-				Accusamus corrupti, quasi inventore ex, labore ducimus est fugit"
-					/>
-					<Comment
-						name="simon"
-						comment="Lorem ipsum dolor sit amet consectetur adipisicing elit.
-				Accusamus corrupti, quasi inventore ex, labore ducimus est fugit"
-					/>
+					{
+						details.reviews?.map((item, i) => {
+							return <Comment
+								name={item.reviewer.name}
+								comment={item.review_text}
+							/>
+						})
+					}
+
 				</div>
 				<div className="horizontal" style={{ height: "2rem" }}></div>
-				<div className="header__text">Comments</div>
+				<div className="header__text">Add Review</div>
 				<div className="horizontal"></div>
 				<textarea
 					className="comment__input"
@@ -99,7 +142,7 @@ function SingleProduct() {
 					style={{ width: "200px" }}
 					onClick={commentButton}
 				>
-					Comment
+					Submit Review
 				</button>
 			</div>
 		</>

@@ -18,8 +18,8 @@ function App() {
 				<Route path="/user" component={() => <Registration />} />
 				<Route path="/message" component={() => <Chat />} />
 				<Route
-					path="/singleproduct"
-					component={() => <SingleProduct />}
+					path="/details/:id"
+					component={SingleProduct}
 				/>
 				<Route path="/adminpanel" component={() => <AdminPanel />} />
 				<Route component={() => <h1>Page Not Found</h1>} />

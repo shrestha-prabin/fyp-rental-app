@@ -10,7 +10,8 @@
 }
 
 .singleproduct__top .img {
-	height: 400px;
+	/* height: 400px; */
+	width: 100%;
 	background: var(--primaryBlue);
 }
 

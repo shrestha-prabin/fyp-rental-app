@@ -2,8 +2,9 @@ import React from "react";
 
 import "../css/dialogbox.css";
 
-function Dialogbox({ title, close }) {
+function Dialogbox({ title, close, onConfirm }) {
 	const confirmButton = () => {
+		onConfirm()
 		close();
 	};
 

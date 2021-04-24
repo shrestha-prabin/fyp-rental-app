@@ -3,7 +3,7 @@ import React from "react";
 import "../css/navbar.css";
 import pin from "../Assets/pin.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { setAuthSession } from "../Store/actions";
+import { setAuthSession, setUserDetails } from "../Store/actions";
 import { Link, useHistory } from "react-router-dom";
 
 function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
@@ -26,8 +26,17 @@ function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
 		return authSession != null
 	}
 
+	const isSeller = () => {
+		return isLoggedIn && userDetails.role === 'seller'
+	}
+
+	const isAdmin = () => {
+		return isLoggedIn && userDetails.role === 'admin'
+	}
+
 	const logout = () => {
         dispatch(setAuthSession(null))
+		dispatch(setUserDetails({}))
 		localStorage.setItem('token', null)
         alert('Logout successful')	
 		history.push('/')
@@ -46,9 +55,19 @@ function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
 			</div>
 			<div className="nav__menu">
 				<Link className="nav__menu__item" to='/'>Home</Link>
-				<div className="nav__menu__item">For Rent</div>
-				<div className="nav__menu__item">For Sale</div>
-				<Link className="nav__menu__item" to='/message'>Messages</Link>
+				{
+					isSeller() && <Link className="nav__menu__item" to='/adminpanel'>Seller Panel</Link>
+				}
+				{
+					isAdmin() && <Link className="nav__menu__item" to='/adminpanel'>Admin Panel</Link>
+				}
+				
+				{/* <div className="nav__menu__item">For Rent</div> */}
+				{/* <div className="nav__menu__item">For Sale</div> */}
+				{
+					isLoggedIn() && <Link className="nav__menu__item" to='/message'>Messages</Link>
+				}
+				
 				{
 					isLoggedIn() ? (
 						<div className="nav__menu__item" onClick={logout}>{`Logout (${userDetails.name})`}</div>
