@@ -27,11 +27,11 @@ function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
 	}
 
 	const isSeller = () => {
-		return isLoggedIn && userDetails.role === 'seller'
+		return isLoggedIn && userDetails?.role === 'seller'
 	}
 
 	const isAdmin = () => {
-		return isLoggedIn && userDetails.role === 'admin'
+		return isLoggedIn && userDetails?.role === 'admin'
 	}
 
 	const logout = () => {
