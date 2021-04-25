@@ -51,7 +51,7 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 				</Link>
 				<div className="nav__menu__item">About</div>
 				<div className="nav__menu__item">Services</div>
-				<div className="nav__menu__item">How it Works</div>
+				{/* <div className="nav__menu__item">How it Works</div> */}
 				<div className="nav__menu__item">Contact Us</div>
 			</div>
 			<div className="nav__right">

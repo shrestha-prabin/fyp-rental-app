@@ -1,12 +1,16 @@
 .singleproduct {
 	background: white;
-	padding: 1rem 6rem;
+	/* padding: 1rem 6rem; */
 	height: 100vh;
 	overflow-y: auto;
 }
 .singleproduct__top {
 	display: flex;
 	align-items: flex-start;
+}
+
+.singleproduct .container {
+	padding: 1rem 6rem;
 }
 
 .singleproduct__top .img {

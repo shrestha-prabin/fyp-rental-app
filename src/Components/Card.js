@@ -16,7 +16,7 @@ function Card({
 	onDelete,
 }) {
 	return (
-		<div className="card">
+		<div className="card" style={{minWidth: 240, height: 'auto'}}>
 			<Link to={`/details/${id}`}>
 				<img className="card__image" src={`${baseURL}${img}`}></img>
 				<div className="card__text">

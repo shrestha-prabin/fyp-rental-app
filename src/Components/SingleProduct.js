@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 import "../css/singleproduct.css";
 import ApiService, { baseURL } from "../Service/ApiService";
@@ -8,6 +9,8 @@ import NavBarHome from "./NavBarHome";
 function SingleProduct({ match }) {
 	const [comment, setComment] = useState("");
 	const [details, setDetails] = useState({})
+
+	const history = useHistory()
 
 	// open dialogbox
 	const [isOpenDialogBox, setIsOpenDialogBox] = useState(false);
@@ -50,6 +53,7 @@ function SingleProduct({ match }) {
 			alert(res.data.message)
 		}).catch(err=>{
 			alert(err)
+			history.push('/user')
 		})
 	}
 
@@ -72,6 +76,8 @@ function SingleProduct({ match }) {
 					<NavBarHome />
 
 				</div>
+				<div className="container">
+
 				<div className="singleproduct__top">
 					<div className="child">
 						<div className="header__text">
@@ -145,6 +151,8 @@ function SingleProduct({ match }) {
 					Submit Review
 				</button>
 			</div>
+			</div>
+
 		</>
 	);
 }
