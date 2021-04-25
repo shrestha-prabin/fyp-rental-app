@@ -2,9 +2,20 @@
 	width: 100vw;
 	height: 400px;
 	background: var(--ligthwhite);
-
-	display: flex;
 	align-items: center;
+}
+
+.aboutus__navbar {
+	width: 100vw;
+	position: sticky;
+	top: 0px;
+	min-height: 12vh;
+	/* padding: 2rem 0rem; */
+	background: var(--white);
+}
+
+.aboutus__body {
+	display: flex;
 }
 
 .aboutus__left {

@@ -8,9 +8,14 @@ import aboutus from "../Assets/aboutus.svg";
 
 import "../css/contactus.css";
 
+import NavBarHome from "../Components/NavBarHome";
+
 function Contactus() {
 	return (
 		<div className="contactus">
+			<div className="contactus__navbar">
+				<NavBarHome />
+			</div>
 			<div className="big__text" style={{ color: "#3371f2" }}>
 				CONTACT US
 			</div>
