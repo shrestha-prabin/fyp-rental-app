@@ -1,0 +1,22 @@
+.aboutus {
+	width: 100vw;
+	height: 400px;
+	background: var(--ligthwhite);
+
+	display: flex;
+	align-items: center;
+}
+
+.aboutus__left {
+	flex: 1;
+	padding: 2rem 5rem;
+}
+
+.aboutus__right {
+	flex: 1;
+	padding: 2rem 5rem;
+}
+
+.aboutus__right img {
+	width: 100%;
+}

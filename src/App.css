@@ -1,7 +1,7 @@
 .app {
 	width: 100vw;
 	height: 100vh;
-	background: var(--lightBlue);
+	background: var(--white);
 	overflow: hidden;
 }
 
@@ -15,6 +15,7 @@ a {
 	--lightBlue: #ecf2fe;
 
 	--white: #ffffff;
+	--ligthwhite: #fafafa;
 
 	/* text color */
 	--primaryBlack: #333333;

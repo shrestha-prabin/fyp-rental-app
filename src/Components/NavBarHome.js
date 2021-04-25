@@ -43,15 +43,18 @@ function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
 	};
 
 	return (
-		<div className="navbar">
-			<div className="nav__left row">
+		<div
+			className="navbar"
+			style={{ padding: "1rem 5rem", boxShadow: "none" }}
+		>
+			<div className="nav__left rows">
 				<img
 					src={pin}
 					style={{ width: "25px", color: "#FF6584" }}
 					alt=""
 				/>
 				<div className="vertical"></div>
-				FlatRentalNepal
+				Flat Rental Nepal
 			</div>
 			<div className="nav__menu">
 				<Link className="nav__menu__item" to="/">

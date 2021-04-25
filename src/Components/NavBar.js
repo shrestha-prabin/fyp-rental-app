@@ -35,7 +35,10 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 	};
 
 	return (
-		<div className="navbar">
+		<div
+			className="navbar"
+			style={{ padding: "1rem 5rem", boxShadow: "none" }}
+		>
 			<div className="nav__left">
 				<img
 					src={pin}
@@ -43,7 +46,7 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 					alt=""
 				/>
 				{"  "}
-				FlatRentalNepal
+				Flat Rental Nepal
 			</div>
 			<div className="nav__menu">
 				<Link className="nav__menu__item" to="/">

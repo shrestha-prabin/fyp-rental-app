@@ -10,6 +10,8 @@ import SingleProduct from "./Components/SingleProduct";
 import Chat from "./Pages/Chat";
 import AdminPanel from "./Pages/AdminPanel";
 import UserTable from "./Components/UserTable";
+import Aboutus from "./Pages/Aboutus";
+import Contactus from "./Pages/Contactus";
 
 function App() {
 	return (
@@ -21,6 +23,8 @@ function App() {
 				<Route path="/details/:id" component={SingleProduct} />
 				<Route path="/adminpanel" component={() => <AdminPanel />} />
 				<Route path="/usertable" component={() => <UserTable />} />
+				<Route path="/aboutus" component={() => <Aboutus />} />
+				<Route path="/contactus" component={() => <Contactus />} />
 				<Route component={() => <h1>Page Not Found</h1>} />
 			</Switch>
 		</div>
