@@ -38,10 +38,10 @@ function Search({
 			<div className="horizontal"></div>
 			<div className="search__form">
 				<div
-					className="row"
+					className="rows"
 					style={{ justifyContent: "space-between" }}
 				>
-					<div className="checkbox row">
+					<div className="checkbox rows">
 						<input
 							type="radio"
 							id="buy"
@@ -68,7 +68,7 @@ function Search({
 						<label for="rent">Rent</label>
 					</div>
 					<div className="vertical" style={{ width: "2rem" }}></div>
-					<div className="row">
+					<div className="rows">
 						<InputWrapper
 							label="Price From"
 							error={null}
@@ -93,7 +93,7 @@ function Search({
 				</div>
 				{/* bottom */}
 				<div className="horizontal"></div>
-				<div className="row">
+				<div className="rows">
 					<InputWrapper
 						label="BHK"
 						error={null}

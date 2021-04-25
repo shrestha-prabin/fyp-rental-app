@@ -155,7 +155,7 @@ a {
 	overflow-y: auto;
 }
 
-.row {
+.rows {
 	display: flex;
 	/* background: red; */
 	align-items: center;
