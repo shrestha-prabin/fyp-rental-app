@@ -60,6 +60,8 @@ function NavBarHome({ parentCallBackLogin, parentCallBackSignup }) {
 				<Link className="nav__menu__item" to="/">
 					Home
 				</Link>
+				<Link className="nav__menu__item" to='aboutus'>About</Link>
+				<Link className="nav__menu__item" to='contactus'>Contact Us</Link>
 				{isSeller() && (
 					<Link className="nav__menu__item" to="/adminpanel">
 						Seller Panel

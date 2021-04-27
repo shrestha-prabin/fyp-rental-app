@@ -52,10 +52,10 @@ function NavBar({ parentCallBackLogin, parentCallBackSignup }) {
 				<Link className="nav__menu__item" to="/">
 					Home
 				</Link>
-				<div className="nav__menu__item">About</div>
-				<div className="nav__menu__item">Services</div>
+				<Link className="nav__menu__item" to='aboutus'>About</Link>
+				{/* <Link className="nav__menu__item">Services</Link> */}
 				{/* <div className="nav__menu__item">How it Works</div> */}
-				<div className="nav__menu__item">Contact Us</div>
+				<Link className="nav__menu__item" to='contactus'>Contact Us</Link>
 			</div>
 			<div className="nav__right">
 				<button
