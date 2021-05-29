@@ -14,7 +14,7 @@ function InputWrapper({
 }) {
 	return (
 		<div className="inputwrapper">
-			<div className="row">
+			<div className="row" style={{marginLeft: 4}}>
 				<div className="label">{label}</div>
 				<div className="error">{error}</div>
 			</div>

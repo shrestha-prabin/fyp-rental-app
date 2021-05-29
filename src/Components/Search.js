@@ -37,37 +37,38 @@ function Search({
 			<div className="horizontal"></div>
 			<div className="horizontal"></div>
 			<div className="search__form">
+				<div className="checkbox rows">
+					<input
+						type="radio"
+						id="buy"
+						name="type"
+						value="Buy"
+						checked={type === "Buy"}
+						onChange={(e) => setType(e.target.value)}
+					/>
+					<div className="vertical"></div>
+					<label for="buy">Buy</label>
+					<div
+						className="vertical"
+						style={{ width: "2rem" }}
+					></div>
+					<input
+						type="radio"
+						id="rent"
+						name="type"
+						checked={type === "Rent"}
+						value="Rent"
+						onChange={(e) => setType(e.target.value)}
+					/>
+					<div className="vertical"></div>
+					<label for="rent">Rent</label>
+				</div>
 				<div
 					className="rows"
 					style={{ justifyContent: "space-between" }}
 				>
-					<div className="checkbox rows">
-						<input
-							type="radio"
-							id="buy"
-							name="type"
-							value="Buy"
-							checked={type === "Buy"}
-							onChange={(e) => setType(e.target.value)}
-						/>
-						<div className="vertical"></div>
-						<label for="buy">Buy</label>
-						<div
-							className="vertical"
-							style={{ width: "2rem" }}
-						></div>
-						<input
-							type="radio"
-							id="rent"
-							name="type"
-							checked={type === "Rent"}
-							value="Rent"
-							onChange={(e) => setType(e.target.value)}
-						/>
-						<div className="vertical"></div>
-						<label for="rent">Rent</label>
-					</div>
-					<div className="vertical" style={{ width: "2rem" }}></div>
+
+					{/* <div className="vertical" style={{ width: "2rem" }}></div> */}
 					<div className="rows">
 						<InputWrapper
 							label="Price From"
