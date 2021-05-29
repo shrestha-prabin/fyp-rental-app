@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import { useHistory } from "react-router";
 
 import "../css/singleproduct.css";
@@ -10,12 +11,15 @@ function SingleProduct({ match }) {
 	const [comment, setComment] = useState("");
 	const [details, setDetails] = useState({})
 
+	const userDetails = useSelector(state => state.userDetails)
+
 	const history = useHistory()
 
 	// open dialogbox
 	const [isOpenDialogBox, setIsOpenDialogBox] = useState(false);
 
 	useEffect(() => {
+		console.log(userDetails);
 		getApartmentDetails(match.params.id)
 	}, [match])
 
@@ -25,6 +29,15 @@ function SingleProduct({ match }) {
 	};
 
 	const commentButton = () => {
+		if (userDetails?.role == 'buyer') {
+		} else if (userDetails?.role == 'seller') {
+			alert('Please login as buyer')
+			return
+		} else {
+			alert('Please login first')
+			return
+		}
+
 		console.log(comment);
 		let params = {
 			"apartment_id": match.params.id,
@@ -44,6 +57,16 @@ function SingleProduct({ match }) {
 	}
 
 	const submitBooking = () => {
+		if (userDetails?.role == 'buyer') {
+		} else if (userDetails?.role == 'seller') {
+			alert('Please login as buyer')
+			return
+		} else {
+			alert('Please login first')
+			history.push('/user')
+			return
+		}
+
 		let params = {
 			"apartment_id": match.params.id,
 			"booking_date": "2030-10-10" // TODO:- Use userinput date
